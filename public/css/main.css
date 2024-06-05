@@ -21,8 +21,8 @@
     height: 100%;
     background-color: #C1121F;
 }
+body {
+    height: 100%;
+    width: 100vw;
+}
 
-/* navbars img {
-    /* width: 100px; */
-    /* background-size: contain;
-} */

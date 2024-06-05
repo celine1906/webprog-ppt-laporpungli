@@ -20,3 +20,9 @@ Route::get('/home', function () {
 Route::get('/register', function () {
     return view('masyarakat.register');
 });
+Route::get('/login', function () {
+    return view('masyarakat.login');
+});
+Route::get('/pengaduan', function () {
+    return view('masyarakat.form-aduan');
+});
