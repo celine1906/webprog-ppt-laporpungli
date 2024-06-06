@@ -29,28 +29,112 @@
             border-radius: 50%;
         }
 
-        .rectangle13 {
-            background-color: rgba(255, 255, 255, 0.23000000417232513);
-            height: 661px;
-            width: 542px;
-            filter: drop-shadow(0px 2px 8.399999618530273px rgba(1, 1, 1, 0.11999999731779099));
-            border-radius: 30px;
-            border: 1px solid rgba(255, 255, 255, 0.46000000834465027);
+
+
+        /* .form-floating {
+            width: 90%;
+        } */
+        .steps-body {
+            background-color: #933131;
+            padding-top: 50px;
+            padding-bottom: 50px;
+            text-align: center;
         }
 
-        .ellipse7 {
-            background-color: #336683;
-            height: 730px;
-            width: 730px;
+        .steps {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 50px;
+        }
+
+        .step {
+            padding: 20px;
+            background-color: #75222d;
+            width: 33.4%;
+        }
+
+        .step h2 {
+            font-size: 2rem;
+        }
+
+        .step a {
+            display: block;
+            margin-top: 10px;
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .profile {
+            margin-top: 50px;
+        }
+
+        .profile img {
+            border-radius: 10px;
+            max-width: 200px;
+            width: 150%;
+        }
+
+        .nomor {
+            margin-top: 30px;
+            padding: 22.5px 5px;
+            background-color: #421F1F;
+            color: #FEF0D5;
             border-radius: 50%;
-            filter: blur(80px);
-            z-index: -1;
+            width: 20%;
+        }
+
+        .step h3 {
+            margin-top: 10px;
+        }
+
+        .rectangle13 {
+            background-color: rgba(255, 255, 255, 0.23000000417232513);
+            height: 600px;
+            width: 80vw;
+            filter: drop-shadow(0px 2px 8.4px rgba(1, 1, 1, 0.11999999731779099));
+            border-radius: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.46000000834465027);
+            z-index: 1;
+            position: relative;
         }
 
         .form-floating {
-            width: 80%;
-            margin: auto;
-            border-radius:30%;
+            width: 90%;
+        }
+
+        .button {
+            padding: 10px 190px;
+            background-color: #FEF0D5;
+            color: #002F49;
+            border: none;
+            border-radius: 50px;
+        }
+
+        .ellipse7 {
+            background-color: #c1121f;
+            height: 730px;
+            width: 730px;
+            border-radius: 50%;
+            filter: blur(100px);
+            z-index: 0;
+            position: absolute;
+            top: 0;
+            left: 0;
+            transform: translate(-200px, -180px)
+        }
+
+        .ellipse9 {
+            background-color: rgba(217, 217, 217, 0.2800000011920929);
+            height: 743px;
+            width: 743px;
+            border-radius: 50%;
+            filter: blur(50px);
+            position: absolute;
+            bottom:0;
+            right: 0;
+            transform: translate(200px,350px);
         }
 
         .detailstatus-body {
@@ -82,7 +166,7 @@
 </head>
 
 <body>
-    <ul class="nav justify-content-end" style="background-color: #003049;width:100vw" style="z-index: 2">
+    <ul class="nav justify-content-end" style="background-color: #003049;width:100vw" style="z-index: 2;position: fixed;">
         <li class="nav-item">
             <a class="nav-link" href="{{ url('/home') }}">Home</a>
         </li>
@@ -90,13 +174,14 @@
             <a class="nav-link" href="{{ url('/pengaduan') }}">Pengaduan</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="{{ url('/masukan') }}">Masukan</a>
-        </li>
-        <li class="nav-item">
             <a class="nav-link" href="#">Chat</a>
         </li>
         <li class="nav-item">
+<<<<<<< HEAD
             <a class="nav-link" href="{{ url('/status') }}">Status</a>
+=======
+            <a class="nav-link" href="#">Status</a>
+>>>>>>> d7f32a5f14faf3fbebd27518ecee0ffdf989b84f
         </li>
         <li class="nav-item">
             <a class="nav-link" href="{{ url('/login') }}">Login</a>
