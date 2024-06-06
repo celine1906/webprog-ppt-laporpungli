@@ -52,6 +52,32 @@
             margin: auto;
             border-radius:30%;
         }
+
+        .detailstatus-body {
+            /* margin: 0%; */
+            padding: 0%;
+            font-family: sans-serif;
+        }
+
+        .status-body{
+            font-family: sans-serif;
+            position: relative;
+            min-height: 150vh;
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-orient: vertical;
+            -webkit-box-direction: normal;
+            -ms-flex-direction: column;
+            flex-direction: column;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+        .bg-box{
+            min-width: 100%;
+            min-height: 100%;
+        }
     </style>
 </head>
 
@@ -70,7 +96,7 @@
             <a class="nav-link" href="#">Chat</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link">Status</a>
+            <a class="nav-link" href="{{ url('/status') }}">Status</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="{{ url('/login') }}">Login</a>

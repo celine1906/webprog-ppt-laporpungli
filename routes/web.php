@@ -20,3 +20,11 @@ Route::get('/home', function () {
 Route::get('/register', function () {
     return view('masyarakat.register');
 });
+
+Route::get('/status', function () {
+    return view('masyarakat.status');
+});
+
+Route::get('/detailstatus', function () {
+    return view('masyarakat.detailstatus');
+});
