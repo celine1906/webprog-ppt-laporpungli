@@ -177,15 +177,29 @@
             <a class="nav-link" href="#">Chat</a>
         </li>
         <li class="nav-item">
-<<<<<<< HEAD
             <a class="nav-link" href="{{ url('/status') }}">Status</a>
-=======
-            <a class="nav-link" href="#">Status</a>
->>>>>>> d7f32a5f14faf3fbebd27518ecee0ffdf989b84f
         </li>
+        @auth
+        <li class="nav-item dropdown" style="list-style-type: none;">
+            <a class="nav-link dropdown-toggle" href="#" role="button"
+                data-bs-toggle="dropdown" aria-expanded="false">
+                Profil
+            </a>
+            <ul class="dropdown-menu">
+                {{-- <li><a class="dropdown-item"
+                        href="{{ route('profile', ['customer_email' => Auth::user()->customer_email]) }}" style="color: black">Lengkapi Data</a></li> --}}
+                <li><a class="dropdown-item" href="" style="color: black">Edit Akun</a></li>
+                {{-- <form action="{{ route('user-logout')}}" method="post"> --}}
+                    <li><a class="dropdown-item" href="{{ route('user-logout') }}" style="color: black">Logout</a></li>
+                {{-- </form> --}}
+            </ul>
+        </li>
+        @else
         <li class="nav-item">
             <a class="nav-link" href="{{ url('/login') }}">Login</a>
         </li>
+        @endauth
+
     </ul>
     <div style="width:100vw;height: 10px;background-color:#780000" style="z-index: 2">
     </div>

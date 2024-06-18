@@ -74,7 +74,8 @@
                 </div>
                 <div id='rectangle13' class='rectangle13 d-flex flex-column mb-3 justify-content-center align-items-center' style="position: relative">
                     <h1 style="margin: 30px auto;text-align:center;color:#F2F6C7">Selamat Datang</h1>
-                    <form action="">
+                    <form action="{{ route('proses.login.user') }}" method="POST">
+                        @csrf
                         <div class="form-floating mb-3 mx-auto" style="background-color: rgba(255, 255, 255, 0);color:white">
                             <input type="email" class="form-control" id="floatingInput" name="email" style="background-color: rgba(255, 255, 255, 0);color:white" placeholder="name@example.com">
                             <label class="floating-input" for="floatingInput">Alamat Email</label>
