@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdminAuthController;
 use App\Http\Controllers\AdminListAduanController;
 use App\Http\Controllers\BuatLaporan;
+use App\Http\Controllers\StatusController;
 use App\Http\Controllers\UserAuthController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -51,5 +52,7 @@ Route::middleware('auth.custom')->group(function () {
     Route::get('/pengaduan', [UserAuthController::class, 'showPengaduan'])->name('showPengaduan');
     Route::post('/buat-laporan', [BuatLaporan::class, 'buatLaporan'])->name('buat-laporan');
     Route::get('/logout', [UserAuthController::class, 'logout'])->name('user-logout');
+    Route::get('/status', [StatusController::class, 'index'])->name('showStatus');
+    Route::get('/detailstatus/{id}', [StatusController::class, 'detail'])->name('detailStatus');
 });
 Route::get('/home', [UserAuthController::class, 'home'])->name('home');

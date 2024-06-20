@@ -20,7 +20,7 @@
                     <div style="display: flex; justify-content:space-between">
                         <div>
                             <p><strong>Bukti Kejadian:</strong></p>
-                            <img src="../../../golang-api/uploads/bukti_kejadian/{{$aduan->bukti_kejadian}}" width='200' height='200' class="img img-responsive clickable-image" data-bs-toggle="modal" data-bs-target="#fotoKTPModal"/>
+                            <img src="../../../golang-api/{{$aduan->bukti_kejadian}}" width='200' height='200' class="img img-responsive clickable-image" data-bs-toggle="modal" data-bs-target="#fotoKTPModal"/>
                         </div>
                     </div>
                     <h4 class="text-center">Klik gambar untuk melihat lebih detail.</h4>

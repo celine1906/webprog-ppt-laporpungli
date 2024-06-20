@@ -23,7 +23,7 @@ class AdminListAduanController extends Controller
     {
         $aduan = BuatLaporan::find($id);
         $aduan->status = $request->status;
-        $aduan->komentar = $request->komentar;
+        $aduan->komentar = $request->comments;
         $aduan->status = 'solved';
 
         if ($request->hasFile('bukti_solved')) {

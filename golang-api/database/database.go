@@ -11,7 +11,8 @@ import (
 var DB *gorm.DB
 
 func Connect() {
-	dsn := "your-username:your-password@tcp(127.0.0.1:3306)/lapor-pungli?charset=utf8mb4&parseTime=True&loc=Local"
+	// dsn := "your-username:your-password@tcp(127.0.0.1:3306)/lapor-pungli?charset=utf8mb4&parseTime=True&loc=Local"
+	dsn := "root:@tcp(localhost:3306)/lapor-pungli"
 	database, err := gorm.Open(mysql.Open(dsn), &gorm.Config{})
 	if err != nil {
 		log.Fatalln("Failed to connect to database: ", err)
