@@ -1,5 +1,11 @@
 <?php
 
+use App\Http\Controllers\AdminAuthController;
+use App\Http\Controllers\AdminListAduanController;
+use App\Http\Controllers\BuatLaporan;
+use App\Http\Controllers\StatusController;
+use App\Http\Controllers\UserAuthController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,19 +19,43 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/home', function () {
-    return view('masyarakat.home');
+
+
+// ADMIN
+
+Route::get('/admin/login',[AdminAuthController::class,'login'])->name('adminlogin');
+Route::get('/admin/register',[AdminAuthController::class,'register'])->name('adminregister');
+Route::get('/admin/dashboard',[AdminAuthController::class,'dashboard'])->name('admindashboard');
+
+Route::post('proses_login_admin',[AdminAuthController::class,'proses_login'])->name('proses.login.admin');
+Route::post('proses_register_admin',[AdminAuthController::class,'proses_register'])->name('proses.register.admin');
+
+Route::get('/admin/aduan', [AdminListAduanController::class, 'index'])->name('adminaduan');
+Route::get('/admin/aduan/{id}', [AdminListAduanController::class, 'adminShow'])->name('admin.aduan.show');
+Route::post('/admin/aduan/{id}/solved', [AdminListAduanController::class, 'updateStatus'])->name('admin.updateStatus');
+
+Auth::routes();
+Route::post('logout',[AdminAuthController::class,'logout'])->name('admin-logout');
+
+
+// USER
+
+Route::middleware('guest.custom')->group(function () {
+    Route::get('/login', [UserAuthController::class, 'login'])->name('login');
+    Route::get('/register', [UserAuthController::class, 'register'])->name('register');
+    Route::post('/proses_login', [UserAuthController::class, 'proses_login'])->name('proses.login.user');
+    Route::post('/proses_register', [UserAuthController::class, 'proses_register'])->name('proses.register.user');
 });
 
-Route::get('/register', function () {
-    return view('masyarakat.register');
+// Routes yang hanya bisa diakses oleh pengguna yang sudah login
+Route::middleware('auth.custom')->group(function () {
+    Route::get('/pengaduan', [UserAuthController::class, 'showPengaduan'])->name('showPengaduan');
+    Route::post('/buat-laporan', [BuatLaporan::class, 'buatLaporan'])->name('buat-laporan');
+    Route::get('/logout', [UserAuthController::class, 'logout'])->name('user-logout');
+    Route::get('/status', [StatusController::class, 'index'])->name('showStatus');
+    Route::get('/detailstatus/{id}', [StatusController::class, 'detail'])->name('detailStatus');
 });
-Route::get('/login', function () {
-    return view('masyarakat.login');
-});
-Route::get('/pengaduan', function () {
-    return view('masyarakat.form-aduan');
-});
+<<<<<<< HEAD
 
 Route::get('/status', function () {
     return view('masyarakat.status');
@@ -36,3 +66,6 @@ Route::get('/detailstatus', function () {
 Route::get('/news-page', function () {
     return view('masyarakat.news-page');
 });
+=======
+Route::get('/home', [UserAuthController::class, 'home'])->name('home');
+>>>>>>> 3c6486061216770a627662673ccd8c6cfbecde26

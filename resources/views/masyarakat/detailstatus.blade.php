@@ -10,22 +10,10 @@
             <h2 style="color: rgb(0, 21, 116); text-align: center; margin: 0;">Cek laporan anda disini</h2>
         </div>
         <div class="status-square" style="width: 1156px; height: auto; background-color: rgb(255, 255, 255); margin: 20px auto 0; padding: 20px; box-sizing: border-box;">
-            <h5 style="color: rgb(0, 17, 92); text-align: left; margin: 0;">
-                sambatpunglimlg
-            </h5>
-            <p style="color: rgb(0, 0, 0); text-align: left; margin: 0;">
-                kepada saya
-            </p>
-            <p style="color: rgb(0, 0, 0); text-align: left; margin: 10px;">
-                Yth. Bapak/Ibu</br>
-                di
-                Tempat
-            </p>
-            <p style="color: rgb(0, 0, 0); text-align: left; margin: 10px;">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
-                sed do eiusmod tempor incididunt ut labore et dolore magna 
-                aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-            </p>
+            <h5 style="color: rgb(0, 17, 92); text-align: left; margin: 0;">{{ $aduan->user->name }}</h5>
+            <p style="color: rgb(0, 0, 0); text-align: left; margin: 10px;"><strong>Pesan:</strong> {{ $aduan->pesan }}</p>
+            <p style="color: rgb(0, 0, 0); text-align: left; margin: 10px;"><strong>Status:</strong> {{ $aduan->status }}</p>
+            <p style="color: rgb(0, 0, 0); text-align: left; margin: 10px;"><strong>Komentar Admin:</strong> {{ $aduan->komentar }}</p>
         </div>
     </div>
 </div>
