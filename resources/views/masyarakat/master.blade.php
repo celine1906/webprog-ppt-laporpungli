@@ -52,6 +52,7 @@
             padding: 20px;
             background-color: #75222d;
             width: 33.4%;
+            height: 250px;
         }
 
         .step h2 {
@@ -177,11 +178,7 @@
             <a class="nav-link" href="#">Chat</a>
         </li>
         <li class="nav-item">
-<<<<<<< HEAD
             <a class="nav-link" href="{{ url('/status') }}">Status</a>
-=======
-            <a class="nav-link" href="#">Status</a>
->>>>>>> d7f32a5f14faf3fbebd27518ecee0ffdf989b84f
         </li>
         <li class="nav-item">
             <a class="nav-link" href="{{ url('/login') }}">Login</a>

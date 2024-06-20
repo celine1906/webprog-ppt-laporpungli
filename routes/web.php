@@ -26,3 +26,13 @@ Route::get('/login', function () {
 Route::get('/pengaduan', function () {
     return view('masyarakat.form-aduan');
 });
+
+Route::get('/status', function () {
+    return view('masyarakat.status');
+});
+Route::get('/detailstatus', function () {
+    return view('masyarakat.detailstatus');
+});
+Route::get('/news-page', function () {
+    return view('masyarakat.news-page');
+});
