@@ -17,12 +17,24 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
+    protected $table = 'users';
+    protected $primaryKey = 'id_user';
+    public $incrementing = true;
     protected $fillable = [
         'name',
         'email',
         'password',
+        'level',
+        'tanggal_lahir',
+        'nik',
+        'gender',
+        'alamat',
+        'no_telp'
     ];
-
+    public function isAdmin()
+    {
+        return $this->level === 'admin';
+    }
     /**
      * The attributes that should be hidden for serialization.
      *
@@ -42,4 +54,6 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+
 }

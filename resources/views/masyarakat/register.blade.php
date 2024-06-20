@@ -85,16 +85,27 @@
         }
     </style>
 </head>
+@if ($errors->any())
+    <div class="col-12">
+        @foreach ($errors->all() as $error)
+            <div class="alert alert-danger">{{ $error }}</div>
+        @endforeach
+    </div>
+@endif
 
+@if (session()->has('error'))
+    <div class="alert alert-danger">{{ session('error') }}</div>
+@endif
 <body>
     <div style="width: 100vw;height:160vh;background-color:#780001;padding:50px 0;">
         <div class='ellipse7' style="transform: translate(-100px,-300px)">
         </div>
         <div id='rectangle13 d-flex flex-column mb-3 justify-content-center align-items-center' class='rectangle13 mx-auto' style="position: relative">
             <h1 style="margin: 30px auto;text-align:center;color:#F2F6C7">Daftar</h1>
-            <form action="">
+            <form action="{{ route('proses.register.user') }}" method="POST">
+                @csrf
                 <div class="form-floating mb-3 mx-auto" style="width: 80%;background-color: rgba(255, 255, 255, 0);color:white">
-                    <input type="text" name="name" class="form-control" id="floatingInput" style="background-color: rgba(255, 255, 255, 0);color:white" placeholder="name@example.com">
+                    <input type="text" name="fullname" class="form-control" id="floatingInput" style="background-color: rgba(255, 255, 255, 0);color:white" placeholder="name@example.com">
                     <label class="floating-input" for="floatingInput">Nama Lengkap</label>
                   </div>
                   <div class="form-floating mb-3 mx-auto" style="width: 80%;background-color: rgba(255, 255, 255, 0);color:white">
