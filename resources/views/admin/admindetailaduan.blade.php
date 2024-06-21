@@ -9,7 +9,7 @@
             <div class="card" style="width: 90%;">
                 <div class="card-header">Detail Pengaduan</div>
                 <div class="card-body">
-                    <div class="d-flex" style="justify-content: space-around">
+                    <div class="d-flex" style="justify-content: space-around; flex-direction: column">
                         <p><strong>ID:</strong> {{ $aduan->id_aduan }}</p>
                         <p><strong>Nama:</strong> {{ $aduan->user->name }}</p>
                         <p><strong>Tanggal Kejadian:</strong> {{ $aduan->tanggal_kejadian }}</p>
@@ -17,6 +17,7 @@
                         <p><strong>Judul:</strong> {{ $aduan->judul }}</p>
                         <p><strong>Pesan:</strong> {{ $aduan->pesan }}</p>
                         <p><strong>Status:</strong> {{ $aduan->status }}</p>
+                        <p><strong>Cluster:</strong> {{ $aduan->cluster }}</p>
                     </div>
                     <div class="d-flex flex-row justify-content-around">
                     <div class="d-flex flex-column">
@@ -28,6 +29,7 @@
                         </div>
                         <p class="text-start">Klik gambar untuk melihat lebih detail.</p>
                     </div>
+<<<<<<< HEAD
                     <div class="d-flex flex-column">
                         <div style="display: flex; justify-content:space-between">
                             <div>
@@ -38,15 +40,21 @@
                         <p class="text-start">Klik video untuk melihat lebih detail.</p>
                     </div>
                 </div>
+=======
+>>>>>>> a60bf5b1f4443ee83bba3343c59cdf43e589b621
                     <div style="margin-top: 20px;">
                         <a href="{{ route('adminaduan') }}" class="btn btn-secondary">Back</a>
                     </div>
                     @if($aduan->status == 'pending')
-                        <form action="{{ route('admin.updateStatus', $aduan->id_aduan) }}" method="POST" style="display:inline;">
+                        <form action="{{ route('admin.updateStatus', $aduan->id_aduan) }}" method="POST" enctype="multipart/form-data" style="display:inline;">
                             @csrf
                             <div class="form-group">
                                 <label for="comments">Comments</label>
                                 <textarea name="comments" id="comments" rows="3" class="form-control"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="bukti_solved">Upload Bukti Solved</label>
+                                <input type="file" name="bukti_solved" id="bukti_solved" class="form-control">
                             </div>
                             <button type="submit" class="btn btn-success">Approve</button>
                         </form>

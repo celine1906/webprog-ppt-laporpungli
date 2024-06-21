@@ -22,7 +22,8 @@ class BuatLaporan extends Model
         'video_kejadian',
         'status',
         'komentar',
-        'bukti_solved'
+        'bukti_solved',
+        'cluster'
     ];
 
     public function user()
