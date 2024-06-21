@@ -5,6 +5,7 @@ use App\Http\Controllers\AdminListAduanController;
 use App\Http\Controllers\BuatLaporan;
 use App\Http\Controllers\StatusController;
 use App\Http\Controllers\UserAuthController;
+use App\Http\Controllers\NewsController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -60,7 +61,6 @@ Route::middleware('auth.custom')->group(function () {
 Route::get('/detailstatus', function () {
     return view('masyarakat.detailstatus');
 });
-Route::get('/news', function () {
-    return view('masyarakat.news-page');
-});
+
 Route::get('/home', [UserAuthController::class, 'home'])->name('home');
+Route::get('/news', [NewsController::class, 'showNews'])->name('news');
