@@ -1,12 +1,14 @@
 <?php
 
-use App\Http\Controllers\AdminAuthController;
-use App\Http\Controllers\AdminListAduanController;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\BuatLaporan;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ChatController;
 use App\Http\Controllers\StatusController;
 use App\Http\Controllers\UserAuthController;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AdminAuthController;
+use App\Http\Controllers\AdminListAduanController;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,6 +36,16 @@ Route::get('/admin/aduan', [AdminListAduanController::class, 'index'])->name('ad
 Route::get('/admin/aduan/{id}', [AdminListAduanController::class, 'adminShow'])->name('admin.aduan.show');
 Route::post('/admin/aduan/{id}/solved', [AdminListAduanController::class, 'updateStatus'])->name('admin.updateStatus');
 
+Route::prefix('admin')->middleware('auth')->group(function () {
+    Route::get('/chat', [ChatController::class, 'index'])->name('admin.chat.index');
+    Route::get('/chat/{user}', [ChatController::class, 'show'])->name('admin.chat.show');
+    Route::post('/chat/{user}/send', [ChatController::class, 'send'])->name('admin.chat.send');
+});
+
+Route::bind('user', function ($value) {
+    return User::where('id_user', $value)->first() ?? abort(404);
+});
+
 Auth::routes();
 Route::post('logout',[AdminAuthController::class,'logout'])->name('admin-logout');
 
@@ -54,5 +66,6 @@ Route::middleware('auth.custom')->group(function () {
     Route::get('/logout', [UserAuthController::class, 'logout'])->name('user-logout');
     Route::get('/status', [StatusController::class, 'index'])->name('showStatus');
     Route::get('/detailstatus/{id}', [StatusController::class, 'detail'])->name('detailStatus');
+    Route::get('/chat', [ChatController::class, 'index'])->name('chat');
 });
 Route::get('/home', [UserAuthController::class, 'home'])->name('home');

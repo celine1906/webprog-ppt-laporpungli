@@ -1,63 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="{{ url('css/main.css') }}">
     <title>Document</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <style>
         body {
             overflow-x: hidden;
         }
-
         .nav-link {
             color: white;
             margin: 0 15px;
         }
-
         .home-body {
             width: 100vw;
             height: 100%;
             background-color: #C1121F;
         }
-
         .home-img img {
             border-radius: 50%;
         }
-
-
-
-        /* .form-floating {
-            width: 90%;
-        } */
         .steps-body {
             background-color: #933131;
             padding-top: 50px;
             padding-bottom: 50px;
             text-align: center;
         }
-
         .steps {
             display: flex;
             justify-content: center;
             align-items: center;
             margin-top: 50px;
         }
-
         .step {
             padding: 20px;
             background-color: #75222d;
             width: 33.4%;
         }
-
         .step h2 {
             font-size: 2rem;
         }
-
         .step a {
             display: block;
             margin-top: 10px;
@@ -65,17 +50,14 @@
             text-decoration: none;
             font-weight: bold;
         }
-
         .profile {
             margin-top: 50px;
         }
-
         .profile img {
             border-radius: 10px;
             max-width: 200px;
             width: 150%;
         }
-
         .nomor {
             margin-top: 30px;
             padding: 22.5px 5px;
@@ -84,11 +66,9 @@
             border-radius: 50%;
             width: 20%;
         }
-
         .step h3 {
             margin-top: 10px;
         }
-
         .rectangle13 {
             background-color: rgba(255, 255, 255, 0.23000000417232513);
             height: 600px;
@@ -99,11 +79,9 @@
             z-index: 1;
             position: relative;
         }
-
         .form-floating {
             width: 90%;
         }
-
         .button {
             padding: 10px 190px;
             background-color: #FEF0D5;
@@ -111,7 +89,6 @@
             border: none;
             border-radius: 50px;
         }
-
         .ellipse7 {
             background-color: #c1121f;
             height: 730px;
@@ -124,7 +101,6 @@
             left: 0;
             transform: translate(-200px, -180px)
         }
-
         .ellipse9 {
             background-color: rgba(217, 217, 217, 0.2800000011920929);
             height: 743px;
@@ -136,13 +112,11 @@
             right: 0;
             transform: translate(200px,350px);
         }
-
         .detailstatus-body {
             /* margin: 0%; */
             padding: 0%;
             font-family: sans-serif;
         }
-
         .status-body{
             font-family: sans-serif;
             position: relative;
@@ -164,7 +138,6 @@
         }
     </style>
 </head>
-
 <body>
     <ul class="nav justify-content-end" style="background-color: #003049;width:100vw" style="z-index: 2;position: fixed;">
         <li class="nav-item">
@@ -174,24 +147,19 @@
             <a class="nav-link" href="{{ url('/pengaduan') }}">Pengaduan</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#">Chat</a>
+            <a class="nav-link" href="{{ url('/chat') }}">Chat</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="{{ url('/status') }}">Status</a>
         </li>
         @auth
         <li class="nav-item dropdown" style="list-style-type: none;">
-            <a class="nav-link dropdown-toggle" href="#" role="button"
-                data-bs-toggle="dropdown" aria-expanded="false">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 Profil
             </a>
             <ul class="dropdown-menu">
-                {{-- <li><a class="dropdown-item"
-                        href="{{ route('profile', ['customer_email' => Auth::user()->customer_email]) }}" style="color: black">Lengkapi Data</a></li> --}}
                 <li><a class="dropdown-item" href="" style="color: black">Edit Akun</a></li>
-                {{-- <form action="{{ route('user-logout')}}" method="post"> --}}
-                    <li><a class="dropdown-item" href="{{ route('user-logout') }}" style="color: black">Logout</a></li>
-                {{-- </form> --}}
+                <li><a class="dropdown-item" href="{{ route('user-logout') }}" style="color: black">Logout</a></li>
             </ul>
         </li>
         @else
@@ -199,14 +167,9 @@
             <a class="nav-link" href="{{ url('/login') }}">Login</a>
         </li>
         @endauth
-
     </ul>
-    <div style="width:100vw;height: 10px;background-color:#780000" style="z-index: 2">
-    </div>
+    <div style="width:100vw;height: 10px;background-color:#780000" style="z-index: 2"></div>
     @yield('content')
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
-    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
-
 </html>
