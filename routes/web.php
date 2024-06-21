@@ -59,4 +59,12 @@ Route::middleware('auth.custom')->group(function () {
     Route::get('/status', [StatusController::class, 'index'])->name('showStatus');
     Route::get('/detailstatus/{id}', [StatusController::class, 'detail'])->name('detailStatus');
 });
+
+
+Route::get('/detailstatus', function () {
+    return view('masyarakat.detailstatus');
+});
+Route::get('/news', function () {
+    return view('masyarakat.news-page');
+});
 Route::get('/home', [UserAuthController::class, 'home'])->name('home');

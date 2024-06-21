@@ -16,8 +16,10 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id');
             $table->string('alamat_kejadian');
             $table->date('tanggal_kejadian');
-            $table->text('pesan');
+            $table->text('judul');
+            $table->longtext('pesan');
             $table->string('bukti_kejadian');
+            $table->string('video_kejadian');
             $table->string('status')->default('pending');
             $table->text('komentar')->nullable();
             $table->string('bukti_solved')->nullable();
