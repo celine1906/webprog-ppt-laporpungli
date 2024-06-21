@@ -7,6 +7,7 @@ use App\Http\Controllers\StatusController;
 use App\Http\Controllers\UserAuthController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ClusteringController;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,6 +37,9 @@ Route::post('/admin/aduan/{id}/solved', [AdminListAduanController::class, 'updat
 
 Auth::routes();
 Route::post('logout',[AdminAuthController::class,'logout'])->name('admin-logout');
+Route::get('/cluster', [ClusteringController::class, 'cluster'])->name('cluster');
+Route::get('/update-cluster', [AdminListAduanController::class, 'updateCluster'])->name('updateCluster');
+
 
 
 // USER

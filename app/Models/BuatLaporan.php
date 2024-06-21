@@ -20,7 +20,8 @@ class BuatLaporan extends Model
         'bukti_kejadian',
         'status',
         'komentar',
-        'bukti_solved'
+        'bukti_solved',
+        'cluster'
     ];
 
     public function user()

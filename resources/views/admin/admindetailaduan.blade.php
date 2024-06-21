@@ -9,7 +9,7 @@
             <div class="card" style="width: 90%;">
                 <div class="card-header">Detail Pengaduan</div>
                 <div class="card-body">
-                    <div class="d-flex" style="justify-content: space-around">
+                    <div class="d-flex" style="justify-content: space-around; flex-direction: column">
                         <p><strong>ID:</strong> {{ $aduan->id_aduan }}</p>
                         <p><strong>Nama:</strong> {{ $aduan->user->name }}</p>
                         <p><strong>Tanggal Kejadian:</strong> {{ $aduan->tanggal_kejadian }}</p>
@@ -23,20 +23,25 @@
                             <img src="../../../golang-api/{{$aduan->bukti_kejadian}}" width='200' height='200' class="img img-responsive clickable-image" data-bs-toggle="modal" data-bs-target="#fotoKTPModal"/>
                         </div>
                     </div>
-                    <h4 class="text-center">Klik gambar untuk melihat lebih detail.</h4>
+                    {{-- <h4 class="text-center">Klik gambar untuk melihat lebih detail.</h4> --}}
                     <div style="margin-top: 20px;">
                         <a href="{{ route('adminaduan') }}" class="btn btn-secondary">Back</a>
                     </div>
                     @if($aduan->status == 'pending')
-                        <form action="{{ route('admin.updateStatus', $aduan->id_aduan) }}" method="POST" style="display:inline;">
+                        <form action="{{ route('admin.updateStatus', $aduan->id_aduan) }}" method="POST" enctype="multipart/form-data" style="display:inline;">
                             @csrf
                             <div class="form-group">
                                 <label for="comments">Comments</label>
                                 <textarea name="comments" id="comments" rows="3" class="form-control"></textarea>
                             </div>
+                            <div class="form-group">
+                                <label for="bukti_solved">Upload Bukti Solved</label>
+                                <input type="file" name="bukti_solved" id="bukti_solved" class="form-control">
+                            </div>
                             <button type="submit" class="btn btn-success">Approve</button>
                         </form>
                     @endif
+                    {{-- <p><strong>Cluster:</strong> {{ $aduan->cluster }}</p> --}}
                 </div>
             </div>
         </div>

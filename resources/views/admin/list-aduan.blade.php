@@ -26,10 +26,11 @@
                 <thead>
                   <tr>
                     <th>ID</th>
-                    <th>User</th>
+                    <th>Nama</th>
                     <th>Date</th>
                     <th>Status</th>
-                    <th>Reason</th>
+                    <th>Pesan</th>
+                    {{-- <th>Cluster</th> --}}
                     <th>Action</th>
                   </tr>
                 </thead>
@@ -41,18 +42,9 @@
                       <td>{{ $aduan->tanggal_kejadian }}</td>
                       <td>{{ $aduan->status }}</td>
                       <td>{{ $aduan->pesan }}</td>
+                      {{-- <td>{{ $aduan->cluster }}</td> --}}
                       <td>
                         <a href="{{ route('admin.aduan.show', $aduan->id_aduan) }}" class="btn btn-primary">Detail</a>
-                        {{-- <form action="{{ route('admin.updateStatus', $aduan->id_aduan) }}" method="POST" enctype="multipart/form-data">
-                          @csrf
-                          <select name="status" required>
-                            <option value="pending" @if($aduan->status == 'pending') selected @endif>Pending</option>
-                            <option value="solved" @if($aduan->status == 'solved') selected @endif>Solved</option>
-                          </select>
-                          <textarea name="komentar" placeholder="Comment">{{ $aduan->komentar }}</textarea>
-                          <input type="file" name="bukti_solved">
-                          <button type="submit">Update</button>
-                        </form> --}}
                       </td>
                     </tr>
                   @endforeach
