@@ -16,6 +16,7 @@
                         <p><strong>Alamat Kejadian:</strong> {{ $aduan->alamat_kejadian }}</p>
                         <p><strong>Pesan:</strong> {{ $aduan->pesan }}</p>
                         <p><strong>Status:</strong> {{ $aduan->status }}</p>
+                        <p><strong>Cluster:</strong> {{ $aduan->cluster }}</p>
                     </div>
                     <div style="display: flex; justify-content:space-between">
                         <div>
@@ -23,7 +24,6 @@
                             <img src="../../../golang-api/{{$aduan->bukti_kejadian}}" width='200' height='200' class="img img-responsive clickable-image" data-bs-toggle="modal" data-bs-target="#fotoKTPModal"/>
                         </div>
                     </div>
-                    {{-- <h4 class="text-center">Klik gambar untuk melihat lebih detail.</h4> --}}
                     <div style="margin-top: 20px;">
                         <a href="{{ route('adminaduan') }}" class="btn btn-secondary">Back</a>
                     </div>
@@ -41,7 +41,6 @@
                             <button type="submit" class="btn btn-success">Approve</button>
                         </form>
                     @endif
-                    {{-- <p><strong>Cluster:</strong> {{ $aduan->cluster }}</p> --}}
                 </div>
             </div>
         </div>

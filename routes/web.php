@@ -8,6 +8,7 @@ use App\Http\Controllers\UserAuthController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ClusteringController;
+use App\Http\Controllers\NewsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,7 +39,9 @@ Route::post('/admin/aduan/{id}/solved', [AdminListAduanController::class, 'updat
 Auth::routes();
 Route::post('logout',[AdminAuthController::class,'logout'])->name('admin-logout');
 Route::get('/cluster', [ClusteringController::class, 'cluster'])->name('cluster');
+// Rute untuk memperbarui cluster
 Route::get('/update-cluster', [AdminListAduanController::class, 'updateCluster'])->name('updateCluster');
+
 
 
 
@@ -64,7 +67,8 @@ Route::middleware('auth.custom')->group(function () {
 Route::get('/detailstatus', function () {
     return view('masyarakat.detailstatus');
 });
-Route::get('/news', function () {
-    return view('masyarakat.news-page');
-});
+// Route::get('/news', function () {
+//     return view('masyarakat.news-page');
+// });
+Route::get('/news', [NewsController::class, 'showNews'])->name('news');
 Route::get('/home', [UserAuthController::class, 'home'])->name('home');

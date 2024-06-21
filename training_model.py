@@ -34,8 +34,10 @@ features.columns = features.columns.astype(str)
 kmeans = KMeans(n_clusters=2, random_state=42)
 kmeans.fit(features)
 
-# Simpan model ke file
+# Simpan model, encoder, dan vectorizer ke file
 joblib_file = 'storage/app/public/kmeans_model.pkl'
 joblib.dump(kmeans, joblib_file)
+joblib.dump(encoder, 'storage/app/public/encoder.pkl')
+joblib.dump(vectorizer, 'storage/app/public/vectorizer.pkl')
 
-print(f"Model KMeans telah disimpan ke {joblib_file}")
+print(f"Model KMeans, encoder, dan vectorizer telah disimpan ke {joblib_file}")

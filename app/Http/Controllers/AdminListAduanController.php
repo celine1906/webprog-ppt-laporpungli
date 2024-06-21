@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\BuatLaporan;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Symfony\Component\Process\Exception\ProcessFailedException;
 use Symfony\Component\Process\Process;
@@ -42,28 +43,45 @@ class AdminListAduanController extends Controller
     {
         $aduans = BuatLaporan::all();
 
+        // Adjust the paths based on your actual storage location
+        $encoderPath = base_path('storage/app/public/encoder.pkl');
+        $vectorizerPath = base_path('storage/app/public/vectorizer.pkl');
+        $kmeansPath = base_path('storage/app/public/kmeans.pkl');
+
         $scriptPath = base_path('predict_cluster.py');
 
         foreach ($aduans as $aduan) {
             $data = [
                 $aduan->tanggal_kejadian,
                 $aduan->alamat_kejadian,
-                $aduan->pesan
+                $aduan->pesan,
+                $encoderPath,
+                $vectorizerPath,
+                $kmeansPath
             ];
 
-            $process = new Process(['python3', $scriptPath, ...$data]);
+            // Call Python script with necessary arguments
+            $process = new Process(['python', $scriptPath, ...$data]);
             $process->run();
 
             if (!$process->isSuccessful()) {
                 throw new ProcessFailedException($process);
             }
 
-            $cluster = trim($process->getOutput());
+            $predictedCluster = trim($process->getOutput());
 
-            $aduan->cluster = $cluster;
-            $aduan->save();
+            // Ensure the predicted cluster is not empty and valid
+            if (is_numeric($predictedCluster)) {
+                $aduan->cluster = (int) $predictedCluster;
+                $aduan->save();
+            } else {
+                // Handle the case where prediction failed or returned invalid data
+                Log::error("Failed to update cluster for aduan ID: {$aduan->id}. Predicted cluster: {$predictedCluster}");
+            }
         }
 
         return redirect()->route('adminaduan')->with('success', 'Clusters updated successfully.');
     }
+
+
 }

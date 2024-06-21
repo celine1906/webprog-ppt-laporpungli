@@ -26,7 +26,7 @@
             <div class="image-container">
                 <img src="{{ asset('$new->bukti_solved') }}" alt="Image 1" class="gallery-image">
                 <div class="image-title">{{$new->judul}}</div>
-                <div class="image-description">{{$new->pesan}}</div>
+                <div class="image-description">{{$new->komentar}}</div>
             </div>
             @endforeach
         </div>
