@@ -15,8 +15,7 @@
     <div class="alert alert-success">{{ session('success') }}</div>
 @endif
 @section('content')
-    <div class="mx-auto text-center" style="background-color:#780000; height: 100vh; display: flex; justify-content: center; align-items: center;">
-        <div class="ellipse7"></div>
+    <div class="mx-auto text-center" style="background-image: url('{{ asset('images/bg.png') }}');background-position:center;background-repeat:no-repeat;background-size:cover; height: 100vh; display: flex; justify-content: center; align-items: center;">
         <div id='rectangle13 d-flex flex-column mb-3 justify-content-center align-items-center' class='rectangle13' style="position: relative;">
             <h1 style="margin: 30px auto;text-align:center;color:#F2F6C7">Form Laporan</h1>
             <form action="{{ route('buat-laporan') }}" method="POST" enctype="multipart/form-data">
@@ -30,13 +29,23 @@
                     <label class="floating-input" for="floatingInput">Tanggal Kejadian</label>
                 </div>
                 <div class="form-floating mb-3 mx-auto" style="background-color: rgba(255, 255, 255, 0);color:white">
+                    <input type="text" class="form-control" id="floatingInput" name="judul" style="background-color: rgba(255, 255, 255, 0);color:white">
+                    <label class="floating-input" for="floatingInput">Judul Laporan</label>
+                </div>
+                <div class="form-floating mb-3 mx-auto" style="background-color: rgba(255, 255, 255, 0);color:white">
                     <textarea class="form-control" name="pesan" placeholder="Masukkan pesan Anda" id="floatingTextarea2" style="background-color: rgba(255, 255, 255, 0);color:white;height: 120px;" rows="7"></textarea>
                     <label for="floatingTextarea2">Pesan</label>
                 </div>
-                <div class="mb-5 mx-auto" style="width: 90%;background-color: rgba(255, 255, 255, 0);color:white">
+                <div class="mb-3 mx-auto" style="width: 90%;background-color: rgba(255, 255, 255, 0);color:white">
                     <div class="input-group">
                         <span class="input-group-text" style="background-color: rgba(255, 255, 255, 0);color:white; border: none;">Foto Kejadian</span>
-                        <input class="form-control form-control-lg" name="bukti_kejadian" id="formFileLg" type="file" style="background-color: rgba(255, 255, 255, 0);color:white; border-left: none;">
+                        <input class="form-control form-control-lg" name="bukti_kejadian" id="formFileLg" type="file" style="background-color: rgba(255, 255, 255, 0);color:white; border-left: none;width:70%">
+                    </div>
+                </div>
+                <div class="mb-5 mx-auto" style="width: 90%;background-color: rgba(255, 255, 255, 0);color:white">
+                    <div class="input-group">
+                        <span class="input-group-text" style="background-color: rgba(255, 255, 255, 0);color:white; border: none;">Video Kejadian</span>
+                        <input class="form-control form-control-lg" name="video_kejadian" id="formFileLgVideo" type="file" style="background-color: rgba(255, 255, 255, 0);color:white; border-left: none;width:70%">
                     </div>
                 </div>
                 <div class="text-center mb-4">

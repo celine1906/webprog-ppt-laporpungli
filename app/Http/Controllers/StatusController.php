@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\BuatLaporan;
 
+
 class StatusController extends Controller
 {
     public function index()
@@ -14,6 +15,7 @@ class StatusController extends Controller
         $aduans = BuatLaporan::where('user_id', $user->id_user)->get();
 
         return view('masyarakat.status', compact('aduans'));
+
     }
 
     public function detail($id)

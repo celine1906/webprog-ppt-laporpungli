@@ -16,8 +16,10 @@ class BuatLaporan extends Model
         'user_id',
         'alamat',
         'tanggal_kejadian',
+        'judul',
         'pesan',
         'bukti_kejadian',
+        'video_kejadian',
         'status',
         'komentar',
         'bukti_solved'
