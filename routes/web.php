@@ -9,6 +9,8 @@ use App\Http\Controllers\StatusController;
 use App\Http\Controllers\UserAuthController;
 use App\Http\Controllers\AdminAuthController;
 use App\Http\Controllers\AdminListAduanController;
+use App\Http\Controllers\NewsController;
+use App\Http\Controllers\ClusteringController;
 
 /*
 |--------------------------------------------------------------------------
@@ -48,6 +50,11 @@ Route::bind('user', function ($value) {
 
 Auth::routes();
 Route::post('logout',[AdminAuthController::class,'logout'])->name('admin-logout');
+Route::get('/cluster', [ClusteringController::class, 'cluster'])->name('cluster');
+// Rute untuk memperbarui cluster
+Route::get('/update-cluster', [AdminListAduanController::class, 'updateCluster'])->name('updateCluster');
+
+
 
 
 // USER
@@ -68,4 +75,11 @@ Route::middleware('auth.custom')->group(function () {
     Route::get('/detailstatus/{id}', [StatusController::class, 'detail'])->name('detailStatus');
     Route::get('/chat', [ChatController::class, 'index'])->name('chat');
 });
+
+
+Route::get('/detailstatus', function () {
+    return view('masyarakat.detailstatus');
+});
+
+Route::get('/news', [NewsController::class, 'showNews'])->name('news');
 Route::get('/home', [UserAuthController::class, 'home'])->name('home');

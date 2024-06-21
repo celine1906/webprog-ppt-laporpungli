@@ -19,7 +19,7 @@ func CreateAduan(w http.ResponseWriter, r *http.Request) {
 	var aduan models.Aduan
 
 	// Parse form data
-	if err := r.ParseMultipartForm(10 << 20); err != nil {
+	if err := r.ParseMultipartForm(50 << 20); err != nil { // Increase limit if needed
 		log.Println("Unable to parse form: ", err)
 		http.Error(w, "Unable to parse form", http.StatusBadRequest)
 		return
@@ -40,16 +40,26 @@ func CreateAduan(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "Invalid date format", http.StatusBadRequest)
 		return
 	}
+	aduan.Judul = r.FormValue("judul")
 	aduan.Pesan = r.FormValue("pesan")
 
-	// Handle file upload
-	file, header, err := r.FormFile("bukti_kejadian")
+	// Handle file upload for bukti kejadian
+	buktiFile, buktiHeader, err := r.FormFile("bukti_kejadian")
 	if err != nil {
-		log.Println("File is required: ", err)
-		http.Error(w, "File is required", http.StatusBadRequest)
+		log.Println("Bukti kejadian file is required: ", err)
+		http.Error(w, "Bukti kejadian file is required", http.StatusBadRequest)
 		return
 	}
-	defer file.Close()
+	defer buktiFile.Close()
+
+	// Handle file upload for video kejadian
+	videoFile, videoHeader, err := r.FormFile("video_kejadian")
+	if err != nil {
+		log.Println("Video kejadian file is required: ", err)
+		http.Error(w, "Video kejadian file is required", http.StatusBadRequest)
+		return
+	}
+	defer videoFile.Close()
 
 	// Ensure the uploads directory exists
 	uploadDir := "uploads/bukti_kejadian"
@@ -61,33 +71,68 @@ func CreateAduan(w http.ResponseWriter, r *http.Request) {
 		}
 	}
 
-	// Create a file within the uploads directory
-	tempFile, err := os.Create(filepath.Join(uploadDir, header.Filename))
+	videoUploadDir := "uploads/video_kejadian"
+	if _, err := os.Stat(videoUploadDir); os.IsNotExist(err) {
+		if err := os.MkdirAll(videoUploadDir, os.ModePerm); err != nil {
+			log.Println("Could not create video uploads directory: ", err)
+			http.Error(w, "Could not create video uploads directory", http.StatusInternalServerError)
+			return
+		}
+	}
+
+	// Create a file within the uploads directory for bukti kejadian
+	buktiTempFile, err := os.Create(filepath.Join(uploadDir, buktiHeader.Filename))
 	if err != nil {
 		log.Println("Could not create file: ", err)
 		http.Error(w, "Could not create file", http.StatusInternalServerError)
 		return
 	}
-	defer tempFile.Close()
+	defer buktiTempFile.Close()
 
-	// Read the contents of the uploaded file into a byte array
-	fileBytes, err := io.ReadAll(file)
+	// Create a file within the uploads directory for video kejadian
+	videoTempFile, err := os.Create(filepath.Join(videoUploadDir, videoHeader.Filename))
+	if err != nil {
+		log.Println("Could not create video file: ", err)
+		http.Error(w, "Could not create video file", http.StatusInternalServerError)
+		return
+	}
+	defer videoTempFile.Close()
+
+	// Read the contents of the uploaded bukti file into a byte array
+	buktiFileBytes, err := io.ReadAll(buktiFile)
 	if err != nil {
 		log.Println("Could not read file: ", err)
 		http.Error(w, "Could not read file", http.StatusInternalServerError)
 		return
 	}
 
-	// Write the contents of the file to the temporary file
-	if _, err := tempFile.Write(fileBytes); err != nil {
+	// Read the contents of the uploaded video file into a byte array
+	videoFileBytes, err := io.ReadAll(videoFile)
+	if err != nil {
+		log.Println("Could not read video file: ", err)
+		http.Error(w, "Could not read video file", http.StatusInternalServerError)
+		return
+	}
+
+	// Write the contents of the bukti file to the temporary file
+	if _, err := buktiTempFile.Write(buktiFileBytes); err != nil {
 		log.Println("Could not write file: ", err)
 		http.Error(w, "Could not write file", http.StatusInternalServerError)
 		return
 	}
 
-	// Save the filename to the database
-	aduan.BuktiKejadian = "uploads/bukti_kejadian/" + header.Filename
+	// Write the contents of the video file to the temporary file
+	if _, err := videoTempFile.Write(videoFileBytes); err != nil {
+		log.Println("Could not write video file: ", err)
+		http.Error(w, "Could not write video file", http.StatusInternalServerError)
+		return
+	}
+
+	// Save the filenames to the database
+	aduan.BuktiKejadian = "uploads/bukti_kejadian/" + buktiHeader.Filename
+	aduan.VideoKejadian = "uploads/video_kejadian/" + videoHeader.Filename
 	aduan.Status = "pending"
+
 	// Save to database
 	if err := database.DB.Create(&aduan).Error; err != nil {
 		log.Println("Database error: ", err)

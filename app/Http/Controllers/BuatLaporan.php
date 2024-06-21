@@ -12,8 +12,10 @@ class BuatLaporan extends Controller
         $request->validate([
             'alamat_kejadian' => 'required|string',
             'tanggal_kejadian' => 'required|date',
+            'judul' => 'required',
             'pesan' => 'required',
             'bukti_kejadian' => 'required|file',
+            'video_kejadian' => 'required|file',
         ]);
 
         $user = auth()->user();
@@ -21,6 +23,8 @@ class BuatLaporan extends Controller
         // Simpan file bukti kejadian
         $buktiKejadianPath = $request->file('bukti_kejadian')->store('bukti-kejadian', 'public');
         $buktiKejadianFilename = basename($buktiKejadianPath); // Ambil nama file yang di-hash
+        $videoKejadianPath = $request->file('video_kejadian')->store('video-kejadian', 'public');
+        $videoKejadianFilename = basename($videoKejadianPath); // Ambil nama file yang di-hash
 
         // Buat klien Guzzle
         $client = new Client();
@@ -41,6 +45,10 @@ class BuatLaporan extends Controller
                     'contents' => $request->tanggal_kejadian,
                 ],
                 [
+                    'name'     => 'judul',
+                    'contents' => $request->judul,
+                ],
+                [
                     'name'     => 'pesan',
                     'contents' => $request->pesan,
                 ],
@@ -48,6 +56,11 @@ class BuatLaporan extends Controller
                     'name'     => 'bukti_kejadian',
                     'contents' => fopen(storage_path('app/public/bukti-kejadian/' . $buktiKejadianFilename), 'r'),
                     'filename' => $buktiKejadianFilename,
+                ],
+                [
+                    'name'     => 'video_kejadian',
+                    'contents' => fopen(storage_path('app/public/video-kejadian/' . $videoKejadianFilename), 'r'),
+                    'filename' => $videoKejadianFilename,
                 ],
             ],
         ]);

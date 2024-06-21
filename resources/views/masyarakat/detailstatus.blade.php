@@ -13,7 +13,16 @@
             <h5 style="color: rgb(0, 17, 92); text-align: left; margin: 0;">{{ $aduan->user->name }}</h5>
             <p style="color: rgb(0, 0, 0); text-align: left; margin: 10px;"><strong>Pesan:</strong> {{ $aduan->pesan }}</p>
             <p style="color: rgb(0, 0, 0); text-align: left; margin: 10px;"><strong>Status:</strong> {{ $aduan->status }}</p>
-            <p style="color: rgb(0, 0, 0); text-align: left; margin: 10px;"><strong>Komentar Admin:</strong> {{ $aduan->komentar }}</p>
+            <p><strong>Bukti Kejadian:</strong></p>
+            <img src="../../golang-api/{{$aduan->bukti_kejadian}}" width='200' height='200' class="img img-responsive clickable-image" data-bs-toggle="modal" data-bs-target="#fotoKTPModal"/>
+            @if($aduan->komentar)
+                <p style="color: rgb(0, 0, 0); text-align: left; margin: 10px;"><strong>Komentar Admin:</strong> {{ $aduan->komentar }}</p>
+            @endif
+
+            @if($aduan->bukti_solved)
+                <p style="color: rgb(0, 0, 0); text-align: left; margin: 10px;"><strong>Bukti Solved:</strong></p>
+                <img src="../../storage/app/public/{{$aduan->bukti_solved}}" width='200' height='200' class="img img-responsive" />
+            @endif
         </div>
     </div>
 </div>

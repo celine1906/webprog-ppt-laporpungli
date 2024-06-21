@@ -6,7 +6,9 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="{{ url('css/main.css') }}">
     <title>Document</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <style>
         body {
             overflow-x: hidden;
@@ -39,6 +41,7 @@
             padding: 20px;
             background-color: #75222d;
             width: 33.4%;
+            height: 250px;
         }
         .step h2 {
             font-size: 2rem;
@@ -108,9 +111,9 @@
             border-radius: 50%;
             filter: blur(50px);
             position: absolute;
-            bottom:0;
+            bottom: 0;
             right: 0;
-            transform: translate(200px,350px);
+            transform: translate(200px, 350px);
         }
         .detailstatus-body {
             /* margin: 0%; */
@@ -132,44 +135,169 @@
             background-repeat: no-repeat;
             background-size: cover;
         }
-        .bg-box{
+
+        .bg-box {
             min-width: 100%;
             min-height: 100%;
+        }
+
+        .image-gallery {
+            position: relative;
+            width: 80%;
+            margin: auto;
+            margin-bottom: 50px;
+        }
+
+        .images {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .image-container {
+            position: relative;
+            width: 30%;
+            overflow: hidden;
+            border-radius: 20px;
+            transition: transform 0.5s ease;
+        }
+
+        .image-container img {
+            border-radius: 20px;
+        }
+
+        .image-container:hover img {
+            transform: scale(1.05);
+            filter: blur(1px);
+            z-index: 2;
+            transition: 0.5s ease-in;
+        }
+
+        .image-description {
+    color: transparent;
+}
+
+.gallery-image:hover .image-description {
+    color: white;
+    z-index: 20;
+    transform: translateY(-80px);
+    transition: 0.5s ease-in;
+}
+
+        .gallery-image {
+            width: 100%;
+            display: block;
+            border-radius: 20px;
+        }
+
+        .image-title {
+            position: absolute;
+            text-align: center;
+            bottom: 0;
+            color: white;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 5px 10px;
+            font-size: 1.2em;
+        }
+
+        .image-description {
+            position: absolute;
+            text-align: center;
+            bottom: 0px;
+            color: white;
+            background: rgba(0, 0, 0, 0.5);
+            width: 100%;
+            padding: 5px 10px;
+            font-size: 1em;
+            z-index: -2;
+            /* display: none; */
+        }
+
+        .image-container .image-description {
+            transform: translateY(0px);
+            transition: 0.5s ease-in-out;
+        }
+        .image-container:hover .image-description {
+            display: block;
+            z-index: 20;
+            transform: translateY(-100px);
+            transition: 1s ease-in;
         }
     </style>
 </head>
 <body>
-    <ul class="nav justify-content-end" style="background-color: #003049;width:100vw" style="z-index: 2;position: fixed;">
+    <ul class="nav justify-content-end" style="background-color: #003049;width:100vw"
+        style="z-index: 2;position: fixed;">
         <li class="nav-item">
             <a class="nav-link" href="{{ url('/home') }}">Home</a>
         </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{{ url('/news') }}">News</a>
+        </li>
+
         <li class="nav-item">
             <a class="nav-link" href="{{ url('/pengaduan') }}">Pengaduan</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="{{ url('/chat') }}">Chat</a>
         </li>
-        <li class="nav-item">
-            <a class="nav-link" href="{{ url('/status') }}">Status</a>
-        </li>
         @auth
-        <li class="nav-item dropdown" style="list-style-type: none;">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Profil
-            </a>
-            <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="" style="color: black">Edit Akun</a></li>
-                <li><a class="dropdown-item" href="{{ route('user-logout') }}" style="color: black">Logout</a></li>
-            </ul>
-        </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route('showStatus') }}">Status</a>
+            </li>
+            <li class="nav-item dropdown" style="list-style-type: none;">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                    aria-expanded="false">
+                    Profil
+                </a>
+                <ul class="dropdown-menu">
+                    {{-- <li><a class="dropdown-item"
+                        href="{{ route('profile', ['customer_email' => Auth::user()->customer_email]) }}" style="color: black">Lengkapi Data</a></li> --}}
+                    <li><a class="dropdown-item" href="" style="color: black">Edit Akun</a></li>
+                    {{-- <form action="{{ route('user-logout')}}" method="post"> --}}
+                    <li><a class="dropdown-item" href="{{ route('user-logout') }}" style="color: black">Logout</a></li>
+                    {{-- </form> --}}
+                </ul>
+            </li>
         @else
-        <li class="nav-item">
-            <a class="nav-link" href="{{ url('/login') }}">Login</a>
-        </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ url('/login') }}">Login</a>
+            </li>
         @endauth
     </ul>
     <div style="width:100vw;height: 10px;background-color:#780000" style="z-index: 2"></div>
     @yield('content')
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
+    </script>
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', (event) => {
+            let currentIndex = 0;
+            const images = document.querySelectorAll('.image-container');
+            const totalImages = images.length;
+            const imagesContainer = document.querySelector('.images');
+
+            document.getElementById('nextButton').addEventListener('click', () => {
+                currentIndex = (currentIndex + 3) % totalImages;
+                updateGallery();
+            });
+
+            document.getElementById('prevButton').addEventListener('click', () => {
+                currentIndex = (currentIndex - 3 + totalImages) % totalImages;
+                updateGallery();
+            });
+
+            function updateGallery() {
+                const offset = -currentIndex * (100 / 3);
+                imagesContainer.style.transform = `translateX(${offset}%)`;
+            }
+
+            // Initial display
+            updateGallery();
+        });
+    </script>
+
+
+
 </body>
 </html>
