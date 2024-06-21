@@ -182,23 +182,42 @@
             position: relative;
             width: 30%;
             overflow: hidden;
+            border-radius: 20px;
             transition: transform 0.5s ease;
         }
 
         .image-container img {
-            border-radius:20px;
+            border-radius: 20px;
         }
+
+        .image-container:hover img {
+            transform: scale(1.05);
+            filter: blur(1px);
+            z-index: 2;
+            transition: 0.5s ease-in;
+        }
+
+        .image-description {
+    color: transparent;
+}
+
+.gallery-image:hover .image-description {
+    color: white;
+    z-index: 20;
+    transform: translateY(-80px);
+    transition: 0.5s ease-in;
+}
 
         .gallery-image {
             width: 100%;
             display: block;
-
+            border-radius: 20px;
         }
 
         .image-title {
             position: absolute;
-            bottom: 10px;
-            left: 10px;
+            text-align: center;
+            bottom: 0;
             color: white;
             background: rgba(0, 0, 0, 0.5);
             padding: 5px 10px;
@@ -207,17 +226,26 @@
 
         .image-description {
             position: absolute;
-            bottom: 40px;
-            left: 10px;
+            text-align: center;
+            bottom: 0px;
             color: white;
             background: rgba(0, 0, 0, 0.5);
+            width: 100%;
             padding: 5px 10px;
             font-size: 1em;
-            display: none;
+            z-index: -2;
+            /* display: none; */
         }
 
+        .image-container .image-description {
+            transform: translateY(0px);
+            transition: 0.5s ease-in-out;
+        }
         .image-container:hover .image-description {
             display: block;
+            z-index: 20;
+            transform: translateY(-100px);
+            transition: 1s ease-in;
         }
     </style>
 </head>
@@ -295,7 +323,7 @@
             // Initial display
             updateGallery();
         });
-        </script>
+    </script>
 
 
 

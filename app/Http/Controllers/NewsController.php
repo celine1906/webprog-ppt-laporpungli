@@ -9,6 +9,8 @@ class NewsController extends Controller
 {
     public function showNews() {
         $news = BuatLaporan::where('status', 'solved')->get();
-        return view('masyarakat.news-page', compact('news'));
+        \Log::info($news); // Tambahkan log untuk memeriksa data
+
+        return view('masyarakat.news-page', ['news' => $news]);
     }
 }

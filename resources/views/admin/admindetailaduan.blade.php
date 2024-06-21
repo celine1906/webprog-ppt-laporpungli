@@ -29,7 +29,6 @@
                         </div>
                         <p class="text-start">Klik gambar untuk melihat lebih detail.</p>
                     </div>
-<<<<<<< HEAD
                     <div class="d-flex flex-column">
                         <div style="display: flex; justify-content:space-between">
                             <div>
@@ -40,8 +39,6 @@
                         <p class="text-start">Klik video untuk melihat lebih detail.</p>
                     </div>
                 </div>
-=======
->>>>>>> a60bf5b1f4443ee83bba3343c59cdf43e589b621
                     <div style="margin-top: 20px;">
                         <a href="{{ route('adminaduan') }}" class="btn btn-secondary">Back</a>
                     </div>

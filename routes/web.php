@@ -9,7 +9,6 @@ use App\Http\Controllers\NewsController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ClusteringController;
-use App\Http\Controllers\NewsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -68,13 +67,6 @@ Route::middleware('auth.custom')->group(function () {
 Route::get('/detailstatus', function () {
     return view('masyarakat.detailstatus');
 });
-<<<<<<< HEAD
 
-=======
-// Route::get('/news', function () {
-//     return view('masyarakat.news-page');
-// });
 Route::get('/news', [NewsController::class, 'showNews'])->name('news');
->>>>>>> a60bf5b1f4443ee83bba3343c59cdf43e589b621
 Route::get('/home', [UserAuthController::class, 'home'])->name('home');
-Route::get('/news', [NewsController::class, 'showNews'])->name('news');

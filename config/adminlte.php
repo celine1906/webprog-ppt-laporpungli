@@ -331,20 +331,9 @@ return [
         [
             'text' => 'List Pengaduan',
             'url' => '/admin/aduan',
-<<<<<<< HEAD
-            'icon' => 'fas fa-fw fa-user',
-        ],
-        // [
-        //     'text' => 'change_password',
-        //     'url' => 'admin/settings',
-        //     'icon' => 'fas fa-fw fa-lock',
-        // ],
-        // [
-=======
             'icon' => 'fas fa-fw fa-clipboard',
         ],
         // [
->>>>>>> a60bf5b1f4443ee83bba3343c59cdf43e589b621
         //     'text' => 'multilevel',
         //     'icon' => 'fas fa-fw fa-share',
         //     'submenu' => [
