@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\BuatLaporan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Symfony\Component\Process\Exception\ProcessFailedException;
 use Symfony\Component\Process\Process;
@@ -13,14 +14,24 @@ class AdminListAduanController extends Controller
 {
     public function index()
     {
-        $aduans = BuatLaporan::all();
+
+
+        if (Auth::check()) {
+            $aduans = BuatLaporan::all();
         return view('admin.list-aduan', compact('aduans'));
+        }
+
+        return redirect('admin/login')->with('You dont have access');
     }
 
     public function adminShow($id)
     {
-        $aduan = BuatLaporan::find($id);
-        return view('admin.admindetailaduan', compact('aduan'));
+        if (Auth::check()) {
+            $aduan = BuatLaporan::find($id);
+            return view('admin.admindetailaduan', compact('aduan'));
+        }
+        return redirect('admin/login')->with('You dont have access');
+
     }
 
     public function updateStatus(Request $request, $id)

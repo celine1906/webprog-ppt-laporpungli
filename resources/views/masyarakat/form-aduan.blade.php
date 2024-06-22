@@ -8,14 +8,15 @@
     </div>
 @endif
 
-@if (session()->has('error'))
-    <div class="alert alert-danger">{{ session('error') }}</div>
-@endif
-@if (session()->has('success'))
-    <div class="alert alert-success">{{ session('success') }}</div>
-@endif
+
 @section('content')
-    <div class="mx-auto text-center" style="background-image: url('{{ asset('images/bg.png') }}');background-position:center;background-repeat:no-repeat;background-size:cover; height: 100vh; display: flex; justify-content: center; align-items: center;">
+<div class="mx-auto text-center d-flex flex-column" style="background-image: url('{{ asset('images/bg.png') }}');background-position:center;background-repeat:no-repeat;background-size:cover; height: 100vh; display: flex; justify-content: center; align-items: center;">
+    @if (session()->has('error'))
+        <div class="alert alert-danger">{{ session('error') }}</div>
+    @endif
+    @if (session()->has('success'))
+        <div class="alert alert-success">{{ session('success') }}</div>
+    @endif
         <div id='rectangle13 d-flex flex-column mb-3 justify-content-center align-items-center' class='rectangle13' style="position: relative;">
             <h1 style="margin: 30px auto;text-align:center;color:#F2F6C7">Form Laporan</h1>
             <form action="{{ route('buat-laporan') }}" method="POST" enctype="multipart/form-data">

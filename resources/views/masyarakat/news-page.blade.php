@@ -22,11 +22,14 @@
     </div>
     <div class="images-container d-flex justify-content-around">
         <div class="images d-flex">
-            @foreach ($news as $new)
-            <div class="image-container">
-                <img src="{{ asset('$new->bukti_solved') }}" alt="Image 1" class="gallery-image">
-                <div class="image-title">{{$new->judul}}</div>
-                <div class="image-description">{{$new->komentar}}</div>
+            @foreach ($news as $newss)
+            {{-- <img src="../../../storage/app/public/{{$newss->bukti_solved}}" alt="Image 1" width="200" height="200" class="img img-responsive gallery-image"> --}}
+            {{-- <img src="{{asset('images/bg.png')}}" alt="Image 1" width="200" height="200" class="img img-responsive gallery-image"> --}}
+            {{-- <img src="{{asset('storage/public/'.$newss->bukti_solved)}}" width='200' height='200' class="img img-responsive" /> --}}
+            <div class="image-container d-flex flex-column" style="max-width: 400px; max-height: 250px;">
+                <img src="{{ asset('storage/' . $newss->bukti_solved) }}" alt="Image 1" class="gallery-image">
+                <div class="image-description">{{ $newss->komentar }}</div>
+                <div class="image-title">{{ $newss->judul }}</div>
             </div>
             @endforeach
         </div>

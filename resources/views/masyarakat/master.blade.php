@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,52 +13,39 @@
         body {
             overflow-x: hidden;
         }
-
         .nav-link {
             color: white;
             margin: 0 15px;
         }
-
         .home-body {
             width: 100vw;
             height: 100%;
             background-color: #C1121F;
         }
-
         .home-img img {
             border-radius: 50%;
         }
-
-
-
-        /* .form-floating {
-            width: 90%;
-        } */
         .steps-body {
             background-color: #933131;
             padding-top: 50px;
             padding-bottom: 50px;
             text-align: center;
         }
-
         .steps {
             display: flex;
             justify-content: center;
             align-items: center;
             margin-top: 50px;
         }
-
         .step {
             padding: 20px;
             background-color: #75222d;
             width: 33.4%;
             height: 250px;
         }
-
         .step h2 {
             font-size: 2rem;
         }
-
         .step a {
             display: block;
             margin-top: 10px;
@@ -67,17 +53,14 @@
             text-decoration: none;
             font-weight: bold;
         }
-
         .profile {
             margin-top: 50px;
         }
-
         .profile img {
             border-radius: 10px;
             max-width: 200px;
             width: 150%;
         }
-
         .nomor {
             margin-top: 30px;
             padding: 22.5px 5px;
@@ -86,11 +69,9 @@
             border-radius: 50%;
             width: 20%;
         }
-
         .step h3 {
             margin-top: 10px;
         }
-
         .rectangle13 {
             background-color: rgba(255, 255, 255, 0.23000000417232513);
             height: 600px;
@@ -101,11 +82,9 @@
             z-index: 1;
             position: relative;
         }
-
         .form-floating {
             width: 90%;
         }
-
         .button {
             padding: 10px 190px;
             background-color: #FEF0D5;
@@ -113,7 +92,6 @@
             border: none;
             border-radius: 50px;
         }
-
         .ellipse7 {
             background-color: #c1121f;
             height: 730px;
@@ -126,7 +104,6 @@
             left: 0;
             transform: translate(-200px, -180px)
         }
-
         .ellipse9 {
             background-color: rgba(217, 217, 217, 0.2800000011920929);
             height: 743px;
@@ -138,14 +115,12 @@
             right: 0;
             transform: translate(200px, 350px);
         }
-
         .detailstatus-body {
             /* margin: 0%; */
             padding: 0%;
             font-family: sans-serif;
         }
-
-        .status-body {
+        .status-body{
             font-family: sans-serif;
             position: relative;
             min-height: 150vh;
@@ -182,23 +157,42 @@
             position: relative;
             width: 30%;
             overflow: hidden;
+            border-radius: 20px;
             transition: transform 0.5s ease;
         }
 
         .image-container img {
-            border-radius:20px;
+            border-radius: 20px;
         }
+
+        .image-container:hover img {
+            transform: scale(1.05);
+            filter: blur(1px);
+            z-index: 2;
+            transition: 0.5s ease-in;
+        }
+
+        .image-description {
+    color: transparent;
+}
+
+.gallery-image:hover .image-description {
+    color: white;
+    z-index: 20;
+    transform: translateY(-80px);
+    transition: 0.5s ease-in;
+}
 
         .gallery-image {
             width: 100%;
             display: block;
-
+            border-radius: 20px;
         }
 
         .image-title {
             position: absolute;
-            bottom: 10px;
-            left: 10px;
+            text-align: center;
+            bottom: 0;
             color: white;
             background: rgba(0, 0, 0, 0.5);
             padding: 5px 10px;
@@ -207,21 +201,29 @@
 
         .image-description {
             position: absolute;
-            bottom: 40px;
-            left: 10px;
+            text-align: center;
+            bottom: 0px;
             color: white;
             background: rgba(0, 0, 0, 0.5);
+            width: 100%;
             padding: 5px 10px;
             font-size: 1em;
-            display: none;
+            z-index: -2;
+            /* display: none; */
         }
 
+        .image-container .image-description {
+            transform: translateY(0px);
+            transition: 0.5s ease-in-out;
+        }
         .image-container:hover .image-description {
             display: block;
+            z-index: 20;
+            transform: translateY(-100px);
+            transition: 1s ease-in;
         }
     </style>
 </head>
-
 <body>
     <ul class="nav justify-content-end" style="background-color: #003049;width:100vw"
         style="z-index: 2;position: fixed;">
@@ -236,7 +238,7 @@
             <a class="nav-link" href="{{ url('/pengaduan') }}">Pengaduan</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#">Chat</a>
+            <a class="nav-link" href="{{ url('/chat') }}">Chat</a>
         </li>
         @auth
             <li class="nav-item">
@@ -261,10 +263,8 @@
                 <a class="nav-link" href="{{ url('/login') }}">Login</a>
             </li>
         @endauth
-
     </ul>
-    <div style="width:100vw;height: 10px;background-color:#780000" style="z-index: 2">
-    </div>
+    <div style="width:100vw;height: 10px;background-color:#780000" style="z-index: 2"></div>
     @yield('content')
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
@@ -295,10 +295,9 @@
             // Initial display
             updateGallery();
         });
-        </script>
+    </script>
 
 
 
 </body>
-
 </html>
