@@ -257,7 +257,7 @@ return [
     */
 
     'use_route_url' => false,
-    'dashboard_url' => 'adminhome',
+    'dashboard_url' => '/admin/dashboard',
     'logout_url' => 'logout',
     'login_url' => 'adminlogin',
     'register_url' => 'adminregister',
@@ -332,6 +332,11 @@ return [
             'text' => 'List Pengaduan',
             'url' => '/admin/aduan',
             'icon' => 'fas fa-fw fa-clipboard',
+        ],
+        [
+            'text' => 'Chat',
+            'url' => '/admin/chat',
+            'icon' => 'fas fa-fw fa-message',
         ],
         // [
         //     'text' => 'multilevel',

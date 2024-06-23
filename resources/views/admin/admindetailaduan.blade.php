@@ -1,7 +1,105 @@
 @extends('adminlte::page')
 
 @section('title','Dashboard')
+<head>
+    <style>
+        body {
+    font-family: Arial, sans-serif;
+}
 
+.container {
+    margin: 20px;
+}
+
+.card {
+    width: 90%;
+    margin: 0 auto;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.card-header {
+    background-color: #f8f8f8;
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+    text-align: center;
+    font-weight: bold;
+}
+
+.card-body {
+    padding: 20px;
+}
+
+.details {
+    display: flex;
+    flex-direction: column;
+}
+
+.media {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
+}
+
+.actions {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.btn {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.btn:hover {
+    background-color: #0056b3;
+}
+
+/* Modal styles */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    padding-top: 100px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0, 0, 0);
+    background-color: rgba(0, 0, 0, 0.9);
+}
+
+.modal-content {
+    margin: auto;
+    display: block;
+    width: 80%;
+    max-width: 700px;
+}
+
+.close {
+    position: absolute;
+    top: 15px;
+    right: 35px;
+    color: #f1f1f1;
+    font-size: 40px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.close:hover,
+.close:focus {
+    color: #bbb;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+    </style>
+</head>
 @section('content')
 <div class="container mt-4">
     <div class="row">
@@ -20,25 +118,25 @@
                         <p><strong>Cluster:</strong> {{ $aduan->cluster }}</p>
                     </div>
                     <div class="d-flex flex-row justify-content-around">
-                    <div class="d-flex flex-column">
-                        <div style="display: flex; justify-content:space-between">
-                            <div>
-                                <p><strong>Bukti Kejadian:</strong></p>
-                                <img src="../../../golang-api/{{$aduan->bukti_kejadian}}" width='200' height='200' class="img img-responsive clickable-image" data-bs-toggle="modal" data-bs-target="#fotoKTPModal"/>
+                        <div class="d-flex flex-column">
+                            <div style="display: flex; justify-content:space-between">
+                                <div>
+                                    <p><strong>Bukti Kejadian:</strong></p>
+                                    <img src="../../../golang-api/{{$aduan->bukti_kejadian}}" width='200' height='200' class="img img-responsive clickable-image"/>
+                                </div>
                             </div>
+                            <p class="text-start">Klik gambar untuk melihat lebih detail.</p>
                         </div>
-                        <p class="text-start">Klik gambar untuk melihat lebih detail.</p>
-                    </div>
-                    <div class="d-flex flex-column">
-                        <div style="display: flex; justify-content:space-between">
-                            <div>
-                                <p><strong>Video Kejadian:</strong></p>
-                                <video src="../../../golang-api/{{$aduan->video_kejadian}}" width='200' height='200' class="img img-responsive clickable-image" data-bs-toggle="modal" data-bs-target="#fotoKTPModal" controls/>
+                        <div class="d-flex flex-column">
+                            <div style="display: flex; justify-content:space-between">
+                                <div>
+                                    <p><strong>Video Kejadian:</strong></p>
+                                    <video src="../../../golang-api/{{$aduan->video_kejadian}}" width='200' height='200' class="img img-responsive clickable-video" controls/>
+                                </div>
                             </div>
+                            <p class="text-start">Klik video untuk melihat lebih detail.</p>
                         </div>
-                        <p class="text-start">Klik video untuk melihat lebih detail.</p>
                     </div>
-                </div>
                     <div style="margin-top: 20px;">
                         <a href="{{ route('adminaduan') }}" class="btn btn-secondary">Back</a>
                     </div>
@@ -62,32 +160,36 @@
     </div>
 </div>
 
-<div class="modal fade" id="fotoKTPModal" tabindex="-1" aria-labelledby="fotoKTPModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="fotoKTPModalLabel">Bukti Kejadian</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body text-center">
-                <img src="" id="modal-img" class="img-fluid"/>
-            </div>
-        </div>
-    </div>
+<div id="imageModal" class="modal">
+    <span class="close">&times;</span>
+    <img class="modal-content" id="modal-img">
 </div>
 
 <script>
-document.addEventListener('DOMContentLoaded', function () {
+    document.addEventListener('DOMContentLoaded', function () {
+    const modal = document.getElementById("imageModal");
+    const modalImg = document.getElementById("modal-img");
     const clickableImages = document.querySelectorAll('.clickable-image');
-    const modalImg = document.getElementById('modal-img');
+    const closeBtn = document.getElementsByClassName("close")[0];
 
     clickableImages.forEach(image => {
         image.addEventListener('click', function () {
-            const imgSrc = this.getAttribute('src');
-            modalImg.setAttribute('src', imgSrc);
+            modal.style.display = "block";
+            modalImg.src = this.src;
         });
     });
+
+    closeBtn.onclick = function () {
+        modal.style.display = "none";
+    };
+
+    window.onclick = function (event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    };
 });
+
 </script>
 
 @endsection
