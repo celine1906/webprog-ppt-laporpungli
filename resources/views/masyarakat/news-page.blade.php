@@ -17,26 +17,16 @@
 
 <h2 class="mt-5 text-center" style="color: #780000;padding-top:100px">BERITA PELAPORAN PUNGLI YANG SUDAH KAMI TANGANI</h2>
 <div class="image-gallery mt-3 d-flex">
-    <div class="navigation-buttons text-center mt-3">
-        <span class="arrow" id="prevButton">&lt;</span>
-    </div>
-    <div class="images-container d-flex justify-content-around">
-        <div class="images d-flex">
+    <div class="images-container d-flex flex-row justify-content-around">
+        {{-- <div class="images d-flex"> --}}
             @foreach ($news as $newss)
-            {{-- <img src="../../../storage/app/public/{{$newss->bukti_solved}}" alt="Image 1" width="200" height="200" class="img img-responsive gallery-image"> --}}
-            {{-- <img src="{{asset('images/bg.png')}}" alt="Image 1" width="200" height="200" class="img img-responsive gallery-image"> --}}
-            {{-- <img src="{{asset('storage/public/'.$newss->bukti_solved)}}" width='200' height='200' class="img img-responsive" /> --}}
-            <div class="image-container d-flex flex-column" style="max-width: 400px; max-height: 250px;">
+            <div class="image-container d-flex flex-column" style="max-width: 400px; max-height: 220px;">
                 <img src="{{ asset('storage/' . $newss->bukti_solved) }}" alt="Image 1" class="gallery-image">
                 <div class="image-description">{{ $newss->komentar }}</div>
                 <div class="image-title">{{ $newss->judul }}</div>
             </div>
             @endforeach
-        </div>
-    </div>
-
-    <div class="navigation-buttons text-center mt-3">
-        <span class="arrow" id="nextButton">&gt;</span>
+        {{-- </div> --}}
     </div>
 </div>
 

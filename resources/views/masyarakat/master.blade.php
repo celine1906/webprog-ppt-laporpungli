@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,39 +14,47 @@
         body {
             overflow-x: hidden;
         }
+
         .nav-link {
             color: white;
             margin: 0 15px;
         }
+
         .home-body {
             width: 100vw;
             height: 100%;
             background-color: #C1121F;
         }
+
         .home-img img {
             border-radius: 50%;
         }
+
         .steps-body {
             background-color: #933131;
             padding-top: 50px;
             padding-bottom: 50px;
             text-align: center;
         }
+
         .steps {
             display: flex;
             justify-content: center;
             align-items: center;
             margin-top: 50px;
         }
+
         .step {
             padding: 20px;
             background-color: #75222d;
             width: 33.4%;
             height: 250px;
         }
+
         .step h2 {
             font-size: 2rem;
         }
+
         .step a {
             display: block;
             margin-top: 10px;
@@ -53,14 +62,17 @@
             text-decoration: none;
             font-weight: bold;
         }
+
         .profile {
             margin-top: 50px;
         }
+
         .profile img {
             border-radius: 10px;
             max-width: 200px;
             width: 150%;
         }
+
         .nomor {
             margin-top: 30px;
             padding: 22.5px 5px;
@@ -69,9 +81,11 @@
             border-radius: 50%;
             width: 20%;
         }
+
         .step h3 {
             margin-top: 10px;
         }
+
         .rectangle13 {
             background-color: rgba(255, 255, 255, 0.23000000417232513);
             height: 600px;
@@ -82,9 +96,11 @@
             z-index: 1;
             position: relative;
         }
+
         .form-floating {
             width: 90%;
         }
+
         .button {
             padding: 10px 190px;
             background-color: #FEF0D5;
@@ -92,6 +108,7 @@
             border: none;
             border-radius: 50px;
         }
+
         .ellipse7 {
             background-color: #c1121f;
             height: 730px;
@@ -104,6 +121,7 @@
             left: 0;
             transform: translate(-200px, -180px)
         }
+
         .ellipse9 {
             background-color: rgba(217, 217, 217, 0.2800000011920929);
             height: 743px;
@@ -115,12 +133,14 @@
             right: 0;
             transform: translate(200px, 350px);
         }
+
         .detailstatus-body {
             /* margin: 0%; */
             padding: 0%;
             font-family: sans-serif;
         }
-        .status-body{
+
+        .status-body {
             font-family: sans-serif;
             position: relative;
             min-height: 150vh;
@@ -163,67 +183,54 @@
 
         .image-container img {
             border-radius: 20px;
+            width: 100%;
+            display: block;
+            transition: transform 0.5s ease, filter 0.5s ease;
         }
 
         .image-container:hover img {
             transform: scale(1.05);
             filter: blur(1px);
-            z-index: 2;
-            transition: 0.5s ease-in;
         }
 
-        .image-description {
-    color: transparent;
-}
-
-.gallery-image:hover .image-description {
-    color: white;
-    z-index: 20;
-    transform: translateY(-80px);
-    transition: 0.5s ease-in;
-}
-
         .gallery-image {
-            width: 100%;
-            display: block;
             border-radius: 20px;
         }
 
         .image-title {
             position: absolute;
-            text-align: center;
             bottom: 0;
+            width: 100%;
+            text-align: center;
             color: white;
             background: rgba(0, 0, 0, 0.5);
             padding: 5px 10px;
             font-size: 1.2em;
+            z-index: 10;
         }
 
         .image-description {
             position: absolute;
+            bottom: 0;
+            width: 100%;
             text-align: center;
-            bottom: 0px;
             color: white;
             background: rgba(0, 0, 0, 0.5);
-            width: 100%;
             padding: 5px 10px;
             font-size: 1em;
-            z-index: -2;
-            /* display: none; */
+            transform: translateY(100%);
+            transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
+            opacity: 0;
+            z-index: 9;
         }
 
-        .image-container .image-description {
-            transform: translateY(0px);
-            transition: 0.5s ease-in-out;
-        }
         .image-container:hover .image-description {
-            display: block;
-            z-index: 20;
-            transform: translateY(-100px);
-            transition: 1s ease-in;
+            transform: translateY(-150px);
+            opacity: 1;
         }
     </style>
 </head>
+
 <body>
     <ul class="nav justify-content-end" style="background-color: #003049;width:100vw"
         style="z-index: 2;position: fixed;">
@@ -300,4 +307,5 @@
 
 
 </body>
+
 </html>
