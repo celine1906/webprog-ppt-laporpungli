@@ -326,7 +326,7 @@ return [
         [
             'text' => 'Dashboard',
             'url' => '/admin/dashboard',
-            'icon' => 'fas fa-fw fa-user',
+            'icon' => 'fas fa-fw fa-home',
         ],
         [
             'text' => 'List Pengaduan',
@@ -336,7 +336,7 @@ return [
         [
             'text' => 'Chat',
             'url' => '/admin/chat',
-            'icon' => 'fas fa-fw fa-message',
+            'icon' => 'fas fa-fw fa-comment',
         ],
         // [
         //     'text' => 'multilevel',
